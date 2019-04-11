@@ -1,7 +1,7 @@
 #!/bin/bash -il
 source ~/.bashrc
-myworkspace=CassECommerce.xcworkspace
-myscheme=CassECommerce
+myworkspace=YourApp.xcworkspace
+myscheme=YourAppScheme
 
 # clean cache
 rm -rf ~/Library/Developer/Xcode/DerivedData/;

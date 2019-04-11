@@ -4,13 +4,13 @@ node {
         doGenerateSubmoduleConfigurations: false, 
         extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'Native']], 
         submoduleCfg: [],
-        userRemoteConfigs: [[credentialsId: 'chao.he', url: 'https://gitee.com/cassfrontend/CassECommerce_iOS.git']]])
+        userRemoteConfigs: [[credentialsId: 'chao.he', url: 'https://xxx.git']]])
     checkout([$class: 'GitSCM', 
         branches: [[name: '$RN_BRANCH']], 
         doGenerateSubmoduleConfigurations: false, 
         extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'RN']], 
         submoduleCfg: [],
-        userRemoteConfigs: [[credentialsId: 'chao.he', url: 'https://gitee.com/cassfrontend/cassec-ecapp.git']]])
+        userRemoteConfigs: [[credentialsId: 'chao.he', url: 'https://xxx.git']]])
 }
 
 node {
@@ -27,8 +27,8 @@ yarn install
 ./scripts/update-config.sh ${Environment}
 echo "-------------------------------------进入静态文件打包环节-------------------------------------"
 # 静态文件打包
-BundlePath=\'../Native/CassECommerce/main.jsbundle\'
-AssetsPath=\'../Native/CassECommerce\'
+BundlePath=\'../YourProjectDir/main.jsbundle\'
+AssetsPath=\'../YourProjectDir\'
 ./node_modules/.bin/react-native bundle \\
   --entry-file index.js \\
   --bundle-output ${BundlePath} \\
@@ -38,9 +38,9 @@ AssetsPath=\'../Native/CassECommerce\'
 
 echo "-------------------------------------进入APP打包环节-------------------------------------------"
 # 打包ipa
-cd ./../Native/CassECommerce/
-Workspace=\'CassECommerce.xcworkspace\'
-Scheme=\'CassECommerce\'
+cd ./YourProjectDir
+Workspace=\'YourApp.xcworkspace\'
+Scheme=\'YourAppScheme\'
 Configuration="Release"
 PackageDir=../../Package
 ArchivePath=${PackageDir}/${Scheme}.xcarchive
@@ -76,11 +76,11 @@ xcodebuild  -exportArchive \\
 
 echo "-------------------------------------发送钉钉提醒---------------------------------------------"
 # send dingding msg
-if [ -f ${ExportIpaPath}/CassECommerce.ipa ]; 
+if [ -f ${ExportIpaPath}/YourAppName.ipa ];
 then 
-./notify.sh true ${BUILD_URL}Package/${Scheme}/CassECommerce.ipa $BUILD_NUMBER CassECommerce-$Environment
+./notify.sh true ${BUILD_URL}Package/${Scheme}/YourAppName.ipa $BUILD_NUMBER YourAppName-$Environment
 else 
-./notify.sh false $BUILD_URL $BUILD_NUMBER CassECommerce-$Environment
+./notify.sh false $BUILD_URL $BUILD_NUMBER YourAppName-$Environment
 fi'''
 }
 
