@@ -112,10 +112,11 @@ def failNotifyData() {
 def successNotifyData() {
   def url = "${env.BUILD_URL}/Package/YourAppName/YourAppName.ipa";
   def title = "YourAppName 构建成功 [${env.BUILD_NUMBER}]"
-  def markdown = "### ${title}\n #### 构建结果: \n > [YourAppName.ipa](${url}) \n > buildUrl: ${env.BUILD_URL} \n"
+  def markdown = "### ${title}\n #### 构建结果: \n * [YourAppName.ipa](${url}) \n > buildUrl: ${env.BUILD_URL} \n"
   if(env.UPLOAD_PGY == 'true') {
   	def downloadUrl = createPGYDownloadURL()
-  	markdown = "### ${title}\n #### 构建结果: \n > [YourAppName.ipa](${url}) \n > buildUrl: ${env.BUILD_URL} \n > pgyUrl: ${downloadUrl}"
+  	def qrUrl = createPGYQRURL()
+  	markdown = "### ${title}\n #### 构建结果: \n * [YourAppName.ipa](${url}) \n * buildUrl: ${env.BUILD_URL} \n * pgyUrl: ${downloadUrl}\n ${qrUrl}"
   }
   return buildJSON(title, markdown)
 }
@@ -131,13 +132,19 @@ def buildJSON(title, markdown) {
   }
   """
 }
-
+// 获取蒲公英的app下载地址
 def createPGYDownloadURL() {
 	def buildShortcutUrl = sh(returnStdout: true, script: 'cat pgy.json | jq -r ".data.buildShortcutUrl"')
 	echo buildShortcutUrl
 	def downloadUrl = "http://www.pgyer.com/${buildShortcutUrl}"
 	echo downloadUrl
 	return downloadUrl
+}
+// 获取蒲公英的app的二维码地址
+def createPGYQRURL() {
+  def buildQRCodeURL = sh(returnStdout: true, script: 'cat pgy.json | jq -r ".data.buildQRCodeURL"')
+  echo buildQRCodeURL
+  return buildQRCodeURL
 }
 
 def createPackageName() {
