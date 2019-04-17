@@ -28,3 +28,6 @@
 
 #### export_ipa_no_pipline_stageview.sh
 > 拉取代码打包ipa发钉钉消息的脚本。同Jenkinsfile的差别就是在jenkins上不会展示stageview
+
+#### modify_build_number.sh
+> 打包修改build号脚本
