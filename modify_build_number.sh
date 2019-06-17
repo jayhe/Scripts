@@ -16,6 +16,7 @@ if [[ -f $BuildJsonPath ]]; then
     PreBuildNumber=`cat ${BuildJsonPath} | jq -r ".BuildNumber"`
     echo "PreBuildVersion:${PreBuildVersion}"
     echo "PreBuildNumber:${PreBuildNumber}"
+    echo "Plist中BuildVersion:${BuildVersion}"
 else
 # 使用项目Info.plist的信息
     echo "使用项目Info.plist的信息"
@@ -28,6 +29,7 @@ if [ "${PreBuildVersion}" == "${BuildVersion}" ]; then
     BuildNumber=`expr ${PreBuildNumber} + 1`
 else
 	echo "版本号改变"
+    BuildNumber=$(/usr/libexec/PlistBuddy -c "Print :CFBundleVersion" "${PlistDir}")
 	echo "BuildNumber:${BuildNumber}"
     BuildNumber=`expr ${BuildNumber} + 1`
 fi
