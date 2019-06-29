@@ -27,7 +27,8 @@ elif [ ${Enviroment} = "production" ]; then
 	ExportPlistPath=${ExportPlistDir}/DistributionExportOptionsPlist.plist
 	Configuration='Release'
 else
-	exit "替换文件失败"
+	echo "替换文件失败"
+	exit 1
 fi
 echo ${Configuration}
 # 编译前清理工程
