@@ -1,3 +1,6 @@
+/**
+ * node parse_error.js line column // 参数为行号列号
+ */
 var fs = require('fs');
 var sourceMap = require('source-map');
 var arguments = process.argv.splice(2);
