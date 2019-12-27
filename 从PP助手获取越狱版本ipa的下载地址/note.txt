@@ -1,0 +1,13 @@
+1.打开命令行工具
+2.cd到当前目录
+3.执行脚本 python ./ipa_url_py2.py
+举个例子：
+hechaodeMacBook-Pro:获取越狱的ipa包 hechao$ python ./ipa_url_py2.py
+Close certificate verify...
+Input the search key word: '苏宁易购'
+Detail url: https://www.25pp.com/ios/detail_547946/
+Orgin download url: aHR0cDovL3IxMS4yNXBwLmNvbS9zb2Z0LzIwMTkvMDUvMjkvMjAxOTA1MjlfNDQ5MV8yNjAzMDY3MTcxMDguaXBh
+Down url: http://r11.25pp.com/soft/2019/05/29/20190529_4491_260306717108.ipa
+
+* Input the search key word:就是你需要下载的越狱ipa的软件名称
+* Down url:就是越狱ipa的下载地址，浏览器打开下载就行
